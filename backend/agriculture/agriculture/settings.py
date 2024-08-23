@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 ]
 
+
 # dj-rest-auth
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'api-auth'

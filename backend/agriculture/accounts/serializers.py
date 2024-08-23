@@ -46,6 +46,7 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     
 class UserLoginSerializer(DefaultLoginSerializer):
+
     def validate(self, attrs):
         email = attrs.get('email')
         password = attrs.get('password')
