@@ -12,6 +12,8 @@ export default {
           black: "#000000",
           darkGray: "#737373",
           mediumGray: "#B7B7B7",
+          footer: "#646558",
+          footerText: "#B6B994",
         },
         category: {
           cyan: "#8FEEFF",

@@ -12,7 +12,7 @@ function Banner() {
           />
         </div>
 
-        <div className="w-full h-full pl-[calc(100%-648px)] flex flex-col justify-center z-[-1] text-4xl font-bold">
+        <div className="w-full h-full pl-[calc(100%-640px)] flex flex-col justify-center z-[-1] text-4xl font-bold">
           <p className="text-white">바쁜 일상에서 벗어난</p>
           <p className="text-white">
             <span className="text-yellow-200">
@@ -37,7 +37,7 @@ function Banner() {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="w-full h-full pr-[calc(100%-648px)] flex flex-col justify-center z-[-1] text-4xl font-bold text-right">
+        <div className="w-full h-full pr-[calc(100%-640px)] flex flex-col justify-center z-[-1] text-4xl font-bold text-right">
           <p className="text-white">시골에서의 삶이</p>
           <p className="text-white">
             <span className="text-yellow-200">

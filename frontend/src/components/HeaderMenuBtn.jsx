@@ -16,14 +16,16 @@ function HeaderMenuBtn(isLogin = false) {
   };
 
   return (
-    <div
-      className={
-        "px-4 py-2 flex border-[2px] border-primary-lightGray rounded-2xl cursor-pointer"
-      }
-      onClick={handleMenuClick}
-    >
-      <FaRegCircleUser className="text-xl text-primary-lightGray" />
-      <IoMdMenu className="text-xl text-primary-lightGray ml-2" />
+    <div>
+      <div
+        className={
+          "px-4 py-2 flex border-[2px] border-primary-lightGray rounded-2xl cursor-pointer"
+        }
+        onClick={handleMenuClick}
+      >
+        <FaRegCircleUser className="text-xl text-primary-lightGray" />
+        <IoMdMenu className="text-xl text-primary-lightGray ml-2" />
+      </div>
     </div>
   );
 }
