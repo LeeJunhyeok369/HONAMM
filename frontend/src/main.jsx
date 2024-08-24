@@ -1,12 +1,15 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import Footer from "./layout/footer";
-import MainPage from "./MainPage.jsx";
+import { Provider } from "react-redux";
+import { RouterProvider } from "react-router-dom";
+import store from "./redux/store";
 import "./reset.css";
+import router from "./router/router";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <MainPage />
-    <Footer />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 );

@@ -1,3 +1,4 @@
+import Bracket from "../Bracket";
 import HeaderMenuBtn from "../HeaderMenuBtn";
 
 function Banner() {
@@ -14,10 +15,11 @@ function Banner() {
 
         <div className="w-full h-full pl-[calc(100%-640px)] flex flex-col justify-center z-[-1] text-4xl font-bold">
           <p className="text-white">바쁜 일상에서 벗어난</p>
-          <p className="text-white">
-            <span className="text-yellow-200">
+          <p className="text-white flex">
+            <Bracket text="" />
+            {/* <span className="text-yellow-200">
               (<span></span>)
-            </span>{" "}
+            </span>*/}{" "}
             호남에서의 힐링, 어떠신가요?
           </p>
           <a
@@ -39,11 +41,8 @@ function Banner() {
         </div>
         <div className="w-full h-full pr-[calc(100%-640px)] flex flex-col justify-center z-[-1] text-4xl font-bold text-right">
           <p className="text-white">시골에서의 삶이</p>
-          <p className="text-white">
-            <span className="text-yellow-200">
-              (<span></span>)
-            </span>{" "}
-            하진 않으신가요?
+          <p className="text-white flex justify-end">
+            <Bracket text="" /> 하진 않으신가요?
           </p>
           <a
             href="#"
@@ -54,7 +53,7 @@ function Banner() {
         </div>
       </div>
       <div className="absolute top-7 right-[calc(60%-700px)] z-50">
-        <HeaderMenuBtn />
+        <HeaderMenuBtn isLogin={false} />
       </div>
     </div>
   );
