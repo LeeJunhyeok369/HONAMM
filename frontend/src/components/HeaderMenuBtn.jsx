@@ -1,16 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { IoMdMenu } from "react-icons/io";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { logout } from "../api/api";
+import { logout as logoutAction } from "../redux/authSlice";
 import { openModal } from "../redux/modalSlice";
 
-function HeaderMenuBtn({ isLogin = false }) {
+function HeaderMenuBtn() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth);
+  const isLogin = useSelector((state) => state.auth.isAuthenticated);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   const handleMenuClick = () => {
-    setIsMenuOpen(!isMenuOpen); // Toggle menu open state
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleModalOpen = (type) => {
+    setIsMenuOpen(false);
+    dispatch(openModal(type));
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      dispatch(logoutAction());
+      Swal.fire({
+        icon: "success",
+        title: "로그아웃되었습니다.",
+        text: "다음에 또 만나요!",
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "로그아웃 실패",
+        text: "다시 시도해주세요.",
+      });
+      console.error("Logout failed:", error);
+    }
   };
 
   const getMenuList = () => {
@@ -20,7 +52,7 @@ function HeaderMenuBtn({ isLogin = false }) {
         { text: "내 예약 목록", url: "/reservations" },
         { text: "내 사진첩 보기", url: "/photos" },
         { text: "호스팅 신청하기", url: "/sirform" },
-        { text: "로그아웃", url: "/logout" },
+        { text: "로그아웃", url: handleLogout }, // 로그아웃 함수 연결
         {
           text: "어르신 도움",
           url: () =>
@@ -33,8 +65,8 @@ function HeaderMenuBtn({ isLogin = false }) {
       ];
     } else {
       menuList = [
-        { text: "로그인", url: () => dispatch(openModal("login")) },
-        { text: "회원가입", url: () => dispatch(openModal("signup")) },
+        { text: "로그인", url: () => handleModalOpen("login") },
+        { text: "회원가입", url: () => handleModalOpen("signup") },
         { text: "호스팅 신청하기", url: "/sirform" },
         {
           text: "어르신 도움",

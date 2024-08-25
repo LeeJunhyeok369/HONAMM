@@ -14,6 +14,8 @@ export default {
           mediumGray: "#B7B7B7",
           footer: "#646558",
           footerText: "#B6B994",
+          input: "#E6E6E6",
+          inputText: "#494949",
         },
         category: {
           cyan: "#8FEEFF",

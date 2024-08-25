@@ -3,7 +3,7 @@ import MainPage from "../MainPage";
 import DefaultLayout from "../layout/DefaultLayout";
 import MyPage from "../pages/MyPage";
 import SirFormPage from "../pages/SirFormPage";
-import SirProfilePage from "../pages/SirProfile";
+import SirProfilePage from "../pages/SirProfilePage";
 import SirViewPage from "../pages/SirViewPage";
 import TownDetilePage from "../pages/TownDetilePage";
 import TownPage from "../pages/TownPage";
