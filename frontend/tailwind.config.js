@@ -6,7 +6,7 @@ export default {
       colors: {
         primary: {
           lightGray: "#AAAAAA",
-          limeGreen: "#A6B200",
+          limeGreen: "#BECA16",
           oliveGray: "#8B8C78",
           lightLime: "#D7E145",
           black: "#000000",
