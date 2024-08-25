@@ -10,7 +10,7 @@ class VillageView(viewsets.ModelViewSet):
 
     queryset = Village.objects.all()
     serializer_class = VillagePostSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
     @swagger_auto_schema(
         request_body=openapi.Schema(

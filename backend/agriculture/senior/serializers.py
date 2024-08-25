@@ -10,8 +10,8 @@ class VillagesSerializer(serializers.ModelSerializer):
 
 class SeniorSerializer(serializers.ModelSerializer):
     townId = serializers.PrimaryKeyRelatedField(
-        queryset=Village.objects.all(),
-        write_only=True  # POST 요청 시에만 사용
+    queryset=Village.objects.all(),
+    write_only=True  # POST 요청 시에만 사용
     )
     town = VillagesSerializer(read_only=True, source='townId')
     intro_image = serializers.ImageField(use_url=True)
