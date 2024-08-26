@@ -34,6 +34,8 @@ class SeniorSerializer(serializers.ModelSerializer):
             'house_image',
             'senior_image',
             'price',
+            'place_x',
+            'place_y',
             'create_at',
         )
 
