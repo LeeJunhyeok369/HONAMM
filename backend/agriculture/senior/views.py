@@ -33,8 +33,11 @@ class SeniorVillageView(viewsets.ModelViewSet):
                 'house_image': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY, description="House image of the senior."),
                 'senior_image': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY, description="Image of the senior."),
                 'price': openapi.Schema(type=openapi.TYPE_INTEGER, description="Price of the senior."),
+                'address': openapi.Schema(type=openapi.TYPE_STRING, description="address of the senior."),
+                'place_x': openapi.Schema(type=openapi.TYPE_NUMBER,format=openapi.FORMAT_FLOAT, description="place_x of senior"),
+                'place_y': openapi.Schema(type=openapi.TYPE_NUMBER,format=openapi.FORMAT_FLOAT, description="place_y of senior"),
             },
-            required=['townId', 'senior_name', 'gender', 'main_category', 'sub_category', 'occupation', 'house_image', 'senior_image', 'intro_text', 'price'],
+            required=['townId', 'senior_name', 'gender', 'main_category', 'sub_category', 'occupation', 'house_image', 'senior_image', 'intro_text', 'price', 'address', 'place_x', 'place_y'],
             example={
                 'townId': 'String',
                 'senior_name': 'String',
@@ -46,7 +49,10 @@ class SeniorVillageView(viewsets.ModelViewSet):
                 'house_image': 'binary_data',
                 'senior_image': 'binary_data',
                 'intro_text': 'String',
-                'price': 'Integer'
+                'price': 'Integer',
+                'address': 'String',
+                'place_x': 'Float',
+                'place_y': 'Float',
             }
         ),
         responses={
@@ -62,8 +68,8 @@ class SeniorVillageView(viewsets.ModelViewSet):
                             'village_id': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_UUID, description="UUID of the village."),
                             'village_name': openapi.Schema(type=openapi.TYPE_STRING, description="Name of the village."),
                             'village_image': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY, description="House image of the village."),
-                            'place_x': openapi.Schema(type=openapi.TYPE_INTEGER, description="place_x of village."),
-                            'place_y': openapi.Schema(type=openapi.TYPE_INTEGER, description="place_y of village."),
+                            'place_x': openapi.Schema(type=openapi.TYPE_NUMBER,format=openapi.FORMAT_FLOAT, description="place_x of village."),
+                            'place_y': openapi.Schema(type=openapi.TYPE_NUMBER,format=openapi.FORMAT_FLOAT, description="place_y of village."),
                             'village_detail': openapi.Schema(type=openapi.TYPE_STRING, description="Detail of the village."),
                             'village_category': openapi.Schema(type=openapi.TYPE_STRING, description="category of the village."),
                             'create_at': openapi.Schema(type=openapi.TYPE_STRING, description="Creation timestamp.")
@@ -79,6 +85,9 @@ class SeniorVillageView(viewsets.ModelViewSet):
                     'intro_text': openapi.Schema(type=openapi.TYPE_STRING, description="Introduction text about the senior."),
                     'senior_image': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY, description="Image of the senior."),
                     'price': openapi.Schema(type=openapi.TYPE_INTEGER, description="Price of the senior."),
+                    'address': openapi.Schema(type=openapi.TYPE_STRING, description="address of the senior."),
+                    'place_x': openapi.Schema(type=openapi.TYPE_NUMBER,format=openapi.FORMAT_FLOAT, description="place_x of senior."),
+                    'place_y': openapi.Schema(type=openapi.TYPE_NUMBER,format=openapi.FORMAT_FLOAT, description="place_y of senior"),
                     'create_at': openapi.Schema(type=openapi.TYPE_STRING, description="Creation timestamp.")
                     }
                 )
