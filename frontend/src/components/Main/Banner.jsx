@@ -1,5 +1,5 @@
+import Header from "../../layout/Header";
 import Bracket from "../Bracket";
-import HeaderMenuBtn from "../HeaderMenuBtn";
 
 function Banner() {
   return (
@@ -52,8 +52,8 @@ function Banner() {
           </a>
         </div>
       </div>
-      <div className="absolute top-7 right-[calc(60%-700px)] z-50">
-        <HeaderMenuBtn isLogin={false} />
+      <div className="absolute top-0 right-[50%] z-50 translate-x-1/2">
+        <Header />
       </div>
     </div>
   );

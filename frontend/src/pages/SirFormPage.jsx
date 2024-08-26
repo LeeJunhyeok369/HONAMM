@@ -59,7 +59,7 @@ function SirFormPage() {
 
   const handleNext = () => {
     if (currentPage === forms.length - 1) {
-      navigate("/sirprofile"); // Navigate to /sirview on submission
+      navigate("/sirprofile");
     } else {
       setCurrentPage((prev) => Math.min(prev + 1, forms.length - 1));
     }
