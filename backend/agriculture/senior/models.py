@@ -16,9 +16,9 @@ class Senior(models.Model):
     house_image = models.ImageField(upload_to='senior_images/house/', default=None)
     senior_image = models.ImageField(upload_to='senior_images/senior/', default=None)
     price = models.IntegerField()
-    address = models.CharField(max_length=255) # 마을 주소
-    place_x = models.IntegerField(null=True, blank=True)
-    place_y = models.IntegerField(null=True, blank=True)
+    address = models.CharField(max_length=255)
+    place_x = models.FloatField(null=True, blank=True)
+    place_y = models.FloatField(null=True, blank=True)
     create_at = models.DateTimeField(default=timezone.now)
 
     
