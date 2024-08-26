@@ -16,7 +16,7 @@ class SeniorVillageView(viewsets.ModelViewSet):
 
     queryset = Senior.objects.all()
     serializer_class = SeniorSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
     @swagger_auto_schema(
         request_body=openapi.Schema(

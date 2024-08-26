@@ -10,7 +10,7 @@ class ReservationView(viewsets.ModelViewSet):
 
     queryset = Reservation.objects.all()
     serializer_class = ReservePostSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
 
     @swagger_auto_schema(

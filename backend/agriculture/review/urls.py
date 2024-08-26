@@ -13,7 +13,17 @@ review_detail = ReviewView.as_view({
     'delete': 'destroy'
 })
 
+senior_review = ReviewView.as_view({
+    'get': 'list'
+})
+
+user_review = ReviewView.as_view({
+    'get': 'list'
+})
+
 urlpatterns = format_suffix_patterns([
     path("review_list/", review_list, name='review_list'),
-    path("review_list/<uuid:pk>/", review_detail, name='review_detail'), 
+    path("review_list/<uuid:pk>/", review_detail, name='review_detail'),
+    path("review_list/senior_review/<uuid:seniorId>/", senior_review, name='senior_review'),
+    path("review_list/user_review/<int:userId>/", user_review, name='user_review'),
 ])
