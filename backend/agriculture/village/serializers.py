@@ -11,6 +11,7 @@ class VillageSerializer(serializers.ModelSerializer):
             'village_image',
             'place_x',
             'place_y',
+            'address',
             'village_details',
             'village_category',
         )
