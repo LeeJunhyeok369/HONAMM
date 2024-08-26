@@ -8,8 +8,9 @@ class Village(models.Model):
     village_image = models.ImageField(upload_to='village_images/', default=None)
     place_x = models.IntegerField()
     place_y = models.IntegerField()
+    address = models.CharField(max_length=255) # 마을 주소
     village_details = models.CharField(max_length=255) # 마을 상세 내용
-    village_category = models.CharField(max_length=200) # 카테고리
+    village_category = models.CharField(max_length=255) # 카테고리
     create_at = models.DateTimeField(default=timezone.now) # 만든 시간
 
 
