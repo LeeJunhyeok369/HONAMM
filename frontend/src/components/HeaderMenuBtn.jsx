@@ -49,9 +49,9 @@ function HeaderMenuBtn() {
     let menuList;
     if (isLogin) {
       menuList = [
-        { text: "내 예약 목록", url: "/reservations" },
-        { text: "내 사진첩 보기", url: "/photos" },
-        { text: "호스팅 신청하기", url: "/sirform" },
+        { text: "마이페이지", url: "/mypage" },
+        // { text: "내 사진첩 보기", url: "/photos" },
+        { text: "호스팅 신청하기", url: "/sirview" },
         { text: "로그아웃", url: handleLogout }, // 로그아웃 함수 연결
         {
           text: "어르신 도움",

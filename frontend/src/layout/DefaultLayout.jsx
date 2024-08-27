@@ -23,7 +23,7 @@ function DefaultLayout() {
   const shouldRenderFooter = location.pathname !== "/sirform";
 
   return (
-    <div className="min-h-screen min-w-[1440px]">
+    <div className="min-h-screen min-w-[1224px] overflow-hidden">
       <Outlet />
       {isModalOpen && modalType === "login" && <AuthModal />}
       {isModalOpen && modalType === "signup" && <SignupModal />}

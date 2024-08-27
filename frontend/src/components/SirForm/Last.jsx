@@ -5,7 +5,7 @@ function Last() {
   return (
     <>
       <div className="flex items-center justify-center">
-        <Bracket text="OOO" />
+        <Bracket text="최금자" />
         <h3 className="ml-2">님 수고하셨습니다.</h3>
       </div>
       <h3>3일이내 010-1234-5678 번호로 </h3>

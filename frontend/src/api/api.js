@@ -51,3 +51,35 @@ export const logout = async () => {
     throw error;
   }
 };
+
+// 마을 목록 가져오는 함수
+export const getVillages = async () => {
+  try {
+    const response = await apiClient.get("/village/village_list/");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching villages:", error);
+    throw error;
+  }
+};
+
+// 어르신 목록 가져오는 함수
+export const getSeniors = async () => {
+  try {
+    const response = await apiClient.get("/senior/senior_list/");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching seniors:", error);
+    throw error;
+  }
+};
+
+export const getSeniorById = async (seniorId) => {
+  try {
+    const response = await apiClient.get(`/senior/senior_list/${seniorId}/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching senior details:", error);
+    throw error;
+  }
+};

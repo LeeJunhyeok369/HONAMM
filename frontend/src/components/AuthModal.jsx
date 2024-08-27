@@ -69,7 +69,7 @@ function AuthModal() {
           <input
             className="w-full border border-gray-300 h-9 px-3 rounded-md"
             type="text"
-            placeholder="영어 소문자 및 숫자로만, 4~16자리"
+            placeholder=""
             name="email"
           />
           <label className="w-full font-bold mt-6 mb-1" htmlFor="password">
@@ -78,7 +78,7 @@ function AuthModal() {
           <input
             className="w-full border border-gray-300 h-9 px-3 rounded-md"
             type="password"
-            placeholder="영어 소문자 및 숫자로만, 4~16자리"
+            placeholder=""
             name="password"
           />
           <button

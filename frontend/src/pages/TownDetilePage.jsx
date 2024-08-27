@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useParams } from "react-router-dom";
 import ReviewBoard from "../components/ReviewBoard";
 import Header from "../layout/Header";
 import Bracket from "./../components/Bracket";
+import { getSeniorById } from "../api/api";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-// Category and description data
 const categories = [
   {
     text: "그림 그리기를 좋아하는",
@@ -87,35 +89,53 @@ const categories = [
 
 function TownDetilePage() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [checkInDate, setCheckInDate] = useState(null);
   const [checkOutDate, setCheckOutDate] = useState(null);
   const [showCheckInCalendar, setShowCheckInCalendar] = useState(false);
   const [showCheckOutCalendar, setShowCheckOutCalendar] = useState(false);
+  const [senior, setSenior] = useState(null);
 
-  const senior = {
-    senior_id: "s2",
-    townId: {
-      village_id: "2",
-      village_name: "추천마을2",
-      village_image: "/images/banner2.png",
-      place_x: 35.435,
-      place_y: 126.735,
-      village_details: "추천받는 마을 2",
-      village_category: "물이 흐르는",
-    },
-    senior_name: "이영희",
-    gender: "여성",
-    main_category: "낚시를 좋아하는",
-    sub_category: ["활발한", "차분한"],
-    occupation: "낚시 전문가",
-    intro_image: "/images/lee1.png",
-    intro_text: "바다와 함께한 낚시 전문가입니다.",
-    house_image: "/images/house2.png",
-    senior_image: "/images/senior2.png",
-    price: 15000,
-    create_at: "2024-08-26T00:00:00Z",
-  };
+  useEffect(() => {
+    async function fetchSenior() {
+      try {
+        const data = await getSeniorById(id);
+
+        // Handling the JSON parsing for sub_category
+        if (typeof data.sub_category === "string") {
+          try {
+            const validSubCategory = data.sub_category
+              .replace(/“/g, '"')
+              .replace(/”/g, '"');
+            data.sub_category = JSON.parse(validSubCategory);
+          } catch (error) {
+            console.error("Error parsing sub_category:", error);
+            data.sub_category = []; // Default to an empty array in case of error
+          }
+        }
+
+        // Handling the JSON parsing for village_category
+        if (typeof data.town.village_category === "string") {
+          try {
+            const validVillageCategory = data.town.village_category
+              .replace(/“/g, '"')
+              .replace(/”/g, '"');
+            data.town.village_category = JSON.parse(validVillageCategory);
+          } catch (error) {
+            console.error("Error parsing village_category:", error);
+            data.town.village_category = []; // Default to an empty array in case of error
+          }
+        }
+
+        setSenior(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Failed to fetch senior details:", error);
+      }
+    }
+    fetchSenior();
+  }, [id]);
 
   const handleCheckInClick = () => {
     setShowCheckInCalendar(!showCheckInCalendar);
@@ -141,72 +161,73 @@ function TownDetilePage() {
     <>
       <Header search />
       <div className="mx-auto mt-5 pt-5 border-t">
-        <div className="max-w-[1280px] mx-auto mb-40">
+        <div className="max-w-[1140px] mx-auto mb-40">
           <div className="flex items-center font-bold text-3xl justify-center w-full mb-8">
-            <Bracket text={senior.townId.village_category} />
+            <Bracket text={senior?.town.place_category} />
             <h3 className="mr-4 ml-1">호남에서</h3>
-            <Bracket text={senior.main_category} />
+            <Bracket text={senior?.main_category} />
             <h3 className="ml-2">시니어</h3>
           </div>
           <div className="w-full h-96 rounded-xl flex items-center justify-between gap-x-4 overflow-hidden">
             <div className="w-4/6 h-full bg-slate-300">
-              <img src={senior.townId.village_image} alt="" />
+              <img
+                className="w-full h-full object-cover"
+                src={senior?.town.village_image}
+                alt=""
+              />
             </div>
             <div className="w-2/6 h-full bg-slate-300">
-              <img src={senior.house_image} alt="" />
+              <img
+                className="w-full h-full object-cover"
+                src={senior?.house_image}
+                alt=""
+              />
             </div>
           </div>
-          <div className="w-full flex justify-between gap-x-4 mt-11">
+          <div className="w-full flex gap-x-4 mt-11">
             <div className="w-4/6">
               <div className="border-b pb-2">
                 <h3 className="text-3xl font-semibold">
-                  {senior.townId.village_name}
+                  {senior?.town.village_name}
                 </h3>
-                <p className="leading-8">마을 설명 설명 설명</p>
+                <p className="leading-8"> {senior?.town.village_details}</p>
               </div>
-              <div className="border-b py-3">
+              <div className="border-b py-5">
                 <h3 className="font-semibold">
                   여기서는 이런 경험을 할 수 있어요
                 </h3>
                 <ul className="text-primary-lightGray flex flex-col gap-y-4 mt-3">
-                  <li className="ml-4">
-                    가을 수확철이라 할머니와 함께 농촌을 체험 할 수 있어요.
-                  </li>
-                  <li className="ml-4">
-                    가을 수확철이라 할머니와 함께 농촌을 체험 할 수 있어요.
-                  </li>
-                  <li className="ml-4">
-                    가을 수확철이라 할머니와 함께 농촌을 체험 할 수 있어요.
-                  </li>
-                  <li className="ml-4">
-                    가을 수확철이라 할머니와 함께 농촌을 체험 할 수 있어요.
-                  </li>
+                  {senior?.town.village_category.map((experience, index) => (
+                    <li key={index} className="ml-2">
+                      {experience}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
-              <div className="border-b py-3 ">
+              <div className="border-b py-5 ">
                 <div className="h-auto flex items-center">
                   <div className="w-20 h-20 rounded-full overflow-hidden">
                     <img
-                      className="w-full h-full"
-                      src={senior.senior_image}
-                      alt={senior.senior_name}
+                      className="w-full h-full object-cover"
+                      src={senior?.senior_image}
+                      alt={senior?.senior_name}
                     />
                   </div>
-                  <h3 className="font-bold text-xl ml-4">
-                    {senior.senior_name}{" "}
-                    {senior.gender === "남성" ? "할아버지 댁" : "할머니 댁"}
+                  <h3 className="font-bold text-xl ml-2">
+                    {senior?.senior_name}{" "}
+                    {senior?.gender === "남자" ? "할아버지 댁" : "할머니 댁"}
                   </h3>
                 </div>
                 <div className="flex flex-wrap items-center mt-4">
-                  {senior.sub_category.map((category, index) => {
+                  {senior?.sub_category.map((category, index) => {
                     const matchedCategory = categories.find(
                       (c) => c.text === category
                     );
                     return (
                       <span
                         key={index}
-                        className="inline-block px-2 py-1 rounded-full border mr-2 text-sm"
+                        className="inline-block px-3 py-1 rounded-full border mr-2 text-sm"
                         style={{
                           backgroundColor: matchedCategory?.color,
                         }}
@@ -215,12 +236,20 @@ function TownDetilePage() {
                       </span>
                     );
                   })}
+                  <span
+                    className="inline-block px-3 py-1 rounded-full border mr-2 text-sm"
+                    style={{
+                      backgroundColor: "#f5f5f5",
+                    }}
+                  >
+                    {senior?.occupation}
+                  </span>
                 </div>
               </div>
-              <div className="border-b py-3 ">
+              <div className="border-b py-5 ">
                 <h3 className="font-semibold">할머니는 이러한 분이세요!</h3>
                 <ul className="text-primary-lightGray flex flex-col gap-y-4 mt-3">
-                  {senior.sub_category.map((category, index) => {
+                  {senior?.sub_category.map((category, index) => {
                     const matchedCategory = categories.find(
                       (c) => c.text === category
                     );
@@ -232,28 +261,27 @@ function TownDetilePage() {
                   })}
                 </ul>
               </div>
-              <div className="py-3">
+              <div className="py-5">
                 <h3 className="font-semibold">자기소개 글</h3>
                 <div className="w-full h-auto bg-gray-300 rounded-lg">
-                  {senior.intro_image ? (
-                    <>
-                      <img
-                        src={senior.intro_image}
-                        alt={senior.senior_name + " 이미지"}
-                      />
-                    </>
+                  {senior?.intro_image ? (
+                    <img
+                      className="w-full h-full object-cover"
+                      src={senior?.intro_image}
+                      alt={senior?.senior_name + " 이미지"}
+                    />
                   ) : (
-                    <p className="p-3">{senior.intro_text}</p>
+                    <p className="p-3">{senior?.intro_text}</p>
                   )}
                 </div>
               </div>
             </div>
             <div
-              className="w-2/6 h-auto py-6 px-9 rounded-md mt-4"
+              className="w-2/6 max-h-72 py-6 px-9 rounded-md mt-4"
               style={{ boxShadow: "0px 4px 37.5px 0px #00000040" }}
             >
               <h3 className="text-3xl text-gray-300 py-4">
-                <span className="text-black">₩{senior.price}</span> / 박
+                <span className="text-black">₩{senior?.price}</span> / 박
               </h3>
               <div className="border border-black rounded-md w-full h-14 flex mb-10 relative">
                 <div
@@ -295,12 +323,31 @@ function TownDetilePage() {
                   </div>
                 )}
               </div>
-              <div className="w-full h-14 bg-[#8B8C78] flex items-center justify-center text-xl font-bold mt-auto rounded-md">
+              <button
+                onClick={() => {
+                  if (checkInDate && checkOutDate) {
+                    Swal.fire({
+                      icon: "success",
+                      title: "예약이 완료되었습니다.",
+                      text: "예약 해주셔서 감사합니다.",
+                      confirmButtonText: "확인",
+                      preConfirm: () => {
+                        navigate("/");
+                      },
+                    });
+                  } else {
+                    Swal.fire({
+                      icon: "error",
+                      title: "날짜를 정해주세요!",
+                    });
+                  }
+                }}
+                className="w-full h-14 bg-[#8B8C78] flex items-center justify-center text-xl font-bold mt-auto rounded-md"
+              >
                 <p className="text-white">예약하기</p>
-              </div>
+              </button>
             </div>
           </div>
-          <p>Details for town with id: {id}</p>
         </div>
         <ReviewBoard />
       </div>

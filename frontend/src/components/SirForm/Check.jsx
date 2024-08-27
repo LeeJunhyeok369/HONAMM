@@ -25,9 +25,9 @@ function Check({
         <h4 className="text-xl font-bold">성별</h4>
         <div className="flex-grow py-2 px-12 rounded-2xl text-black text-center">
           {gender === "male"
-            ? "남성"
+            ? "남자"
             : gender === "female"
-            ? "여성"
+            ? "여자"
             : "성별이 선택되지 않았습니다."}
         </div>
       </div>

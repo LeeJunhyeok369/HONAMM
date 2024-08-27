@@ -4,8 +4,8 @@ import Bracket from "./../Bracket";
 const workCategories = [
   { text: "감자농사", color: "#8FEEFF" },
   { text: "콩농사", color: "#D3D3D3" },
-  { text: "고추농사", color: "#87CDFF" },
-  { text: "마늘농사", color: "#D3EE79" },
+  { text: "홍어잡이", color: "#87CDFF" },
+  { text: "전복양식", color: "#D3EE79" },
   { text: "벼농사", color: "#69D170" },
   { text: "양파농사", color: "#FFBBA3" },
   { text: "옥수수농사", color: "#FF8BC3" },
@@ -27,7 +27,7 @@ function Work({ onSelect, initialWork }) {
   return (
     <div className="p-4">
       <h3 className="font-bold mb-2 flex items-center justify-center">
-        <Bracket /> 어떤 농사를 주로 짓고 계신가요?
+        어떤 일을 하고 계신가요?
       </h3>
       <div className="flex flex-wrap gap-2 w-[39rem] m-auto text-lg mt-8">
         {workCategories.map((work, index) => (

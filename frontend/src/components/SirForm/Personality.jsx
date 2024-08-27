@@ -45,7 +45,8 @@ function Personality({ onSelect, initialSelections }) {
   return (
     <div className="p-4">
       <h3 className="font-bold mb-2 flex items-center justify-center">
-        <Bracket /> 님은 어떤 사람인가요? (중복선택 가능, 최대 5개)
+        <Bracket text="최금자" /> 님은 어떤 사람인가요? (중복선택 가능, 최대
+        5개)
       </h3>
       <div className="flex flex-wrap gap-2 w-[39rem] m-auto text-lg mt-8">
         {categories.map((category, index) => (
