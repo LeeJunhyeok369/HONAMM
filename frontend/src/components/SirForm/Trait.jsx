@@ -8,13 +8,14 @@ function Trait({ selections, onSelect, initialTrait }) {
   }, [selectedTrait, onSelect]);
 
   const handleSelect = (trait) => {
+    console.log(trait);
     setSelectedTrait(trait);
   };
 
   return (
     <div className="p-4">
       <h3 className="font-bold mb-2 flex items-center justify-center">
-        선택한 특성 중 하나를 선택해주세요
+        선택한 성격 중 자신에게 가장 맞는 하나를 선택해주세요.
       </h3>
       <div className="flex flex-wrap gap-2 w-[39rem] m-auto text-lg mt-8">
         {selections.map((trait, index) => (

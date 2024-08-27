@@ -4,7 +4,7 @@ import HeaderMenuBtn from "./../components/HeaderMenuBtn";
 function Header({ search = false }) {
   return (
     <div className="h-32 w-full">
-      <div className="w-[1280px] h-full m-auto flex items-center justify-between">
+      <div className="w-[1140px] h-full m-auto flex items-center justify-between">
         <a href="/">
           <img src="/images/logo.svg" alt="logo" />
         </a>

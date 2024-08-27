@@ -1,26 +1,30 @@
 import React, { useState } from "react";
 import Bracket from "./../Bracket";
 
-function Intrduce() {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [isWritingMode, setIsWritingMode] = useState(false);
+function Intrduce({ introContent, setIntroContent }) {
+  const { image, text } = introContent; // Destructure the intro content
+  const [isWritingMode, setIsWritingMode] = useState(Boolean(text)); // Determines mode based on initial text value
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setSelectedImage(e.target.result);
+        setIntroContent({ ...introContent, image: e.target.result, text: "" });
       };
       reader.readAsDataURL(file);
     }
   };
 
+  const handleTextChange = (e) => {
+    setIntroContent({ ...introContent, text: e.target.value, image: null });
+  };
+
   return (
     <div className="p-4">
-      <div className="flex items-center justify-center mb-4">
-        <Bracket />
-        <h3 className="text-2xl font-bold ml-3">
+      <div className="flex items-center justify-center mb-4 mt-10">
+        <Bracket text="최금자"/>
+        <h3 className="text-2xl font-bold ml-3 ">
           님 집에 방문할 사람들에게 자기소개 해주세요!
         </h3>
       </div>
@@ -29,9 +33,9 @@ function Intrduce() {
         <>
           <label htmlFor="IntrduceImg">
             <div className="mt-4 w-[40rem] h-96 bg-primary-input flex items-center justify-center cursor-pointer rounded-lg shadow-inner">
-              {selectedImage ? (
+              {image ? (
                 <img
-                  src={selectedImage}
+                  src={image}
                   alt="Selected Preview"
                   className="w-full h-full object-cover rounded-lg shadow-lg"
                 />
@@ -66,6 +70,8 @@ function Intrduce() {
               placeholder="자기소개를 작성해 주세요."
               rows="6"
               className="w-full border rounded-lg p-2"
+              value={text}
+              onChange={handleTextChange}
             ></textarea>
           </div>
           <button

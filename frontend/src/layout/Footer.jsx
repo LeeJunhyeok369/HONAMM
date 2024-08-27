@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <div className="bg-primary-footer w-full h-auto text-xs">
-      <div className="max-w-[1280px] m-auto flex flex-col justify-center py-14 text-white">
+      <div className="max-w-[1140px] m-auto flex flex-col justify-center py-14 text-white">
         <h3 className="text-primary-footerText text-lg mb-5">
           호남을 상징하는 형용사
         </h3>

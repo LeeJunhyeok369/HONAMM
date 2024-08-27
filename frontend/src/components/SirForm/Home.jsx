@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Bracket from "../Bracket";
 
-function Home() {
-  const [selectedImage, setSelectedImage] = useState(null);
-
+function Home({ selectedImage, setSelectedImage }) {
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setSelectedImage(e.target.result);
+        setSelectedImage(e.target.result); // Update the image in the parent component
       };
       reader.readAsDataURL(file);
     }
@@ -19,7 +17,7 @@ function Home() {
     <div className="p-4 w-full">
       <div className="flex flex-col items-center w-full">
         <div className="flex items-center justify-center mb-4">
-          <Bracket />
+          <Bracket text="최금자" />
           <h3 className="text-2xl font-bold ml-3">
             님이 살고 있는 자택의 사진을 넣어주세요!
           </h3>
